@@ -1,7 +1,13 @@
 import "./menu-item.styles.scss";
-const MenItem = ({ title, imageUrl, size }) => {
+import { useHistory, useRouteMatch } from "react-router";
+const MenItem = ({ title, imageUrl, size, linkUrl }) => {
+  const { url } = useRouteMatch();
+  const history = useHistory();
   return (
-    <div className={`${size} menu-item`}>
+    <div
+      className={`${size} menu-item`}
+      onClick={() => history.push(url + linkUrl)}
+    >
       <div
         className="background-image"
         style={{ backgroundImage: `url(${imageUrl})` }}
