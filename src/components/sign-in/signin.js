@@ -2,7 +2,7 @@ import "./signin.scss";
 import { useState } from "react";
 import FormInput from "../form-input/form-input";
 import CustonButton from "../custom-button/custom-button";
-import { signInWithGoogle } from "../firebase/firebase";
+import { signInWithGoogle } from "../../firebase/firebase";
 const SignIn = () => {
   const [userState, setUserState] = useState({
     email: "",
@@ -47,8 +47,10 @@ const SignIn = () => {
           label="Password"
         />
         <CustonButton type="submit">Sign In</CustonButton>
+        <CustonButton type="button" onClick={signInWithGoogle}>
+          Sign In with Google
+        </CustonButton>
       </form>
-      <div onClick={() => signInWithGoogle()}>Sign In with Google</div>
     </div>
   );
 };

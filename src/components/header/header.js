@@ -1,6 +1,8 @@
 import "./header.scss";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../../assets/crown.svg.svg";
+import { auth } from "../../firebase/firebase";
+import { signOut } from "@firebase/auth";
 
 const Header = ({ currentUser }) => {
   return (
@@ -18,11 +20,11 @@ const Header = ({ currentUser }) => {
         {currentUser ? (
           <div
             className="option"
-            // onClick={() =>
-            //   signOut(auth)
-            //     .then((result) => {})
-            //     .catch((error) => console.log(error))
-            // }
+            onClick={() =>
+              signOut(auth)
+                .then((result) => {})
+                .catch((error) => console.log(error))
+            }
           >
             Sign Out
           </div>
