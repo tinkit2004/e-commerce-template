@@ -46,10 +46,12 @@ const SignIn = () => {
           value={userState.password}
           label="Password"
         />
-        <CustonButton type="submit">Sign In</CustonButton>
-        <CustonButton type="button" onClick={signInWithGoogle}>
-          Sign In with Google
-        </CustonButton>
+        <div className="buttons">
+          <CustonButton type="submit">Sign In</CustonButton>
+          <CustonButton type="button" onClick={signInWithGoogle} isGoogleSignIn>
+            Sign In with Google
+          </CustonButton>
+        </div>
       </form>
     </div>
   );

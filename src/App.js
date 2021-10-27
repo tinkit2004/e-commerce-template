@@ -16,7 +16,7 @@ function App() {
         setCurrentUser(user);
         console.log(user);
       } else {
-        console.log("no user");
+        setCurrentUser(null);
       }
     });
     return () => {
