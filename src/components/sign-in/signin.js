@@ -3,6 +3,8 @@ import { useState } from "react";
 import FormInput from "../form-input/form-input";
 import CustonButton from "../custom-button/custom-button";
 import { signInWithGoogle } from "../../firebase/firebase";
+import { signInWithEmailAndPassword } from "@firebase/auth";
+import { auth } from "../../firebase/firebase";
 const SignIn = () => {
   const [userState, setUserState] = useState({
     email: "",
@@ -19,16 +21,22 @@ const SignIn = () => {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    setUserState({ email: "", password: "" });
+    const { email, password } = userState;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      setUserState({ email: "", password: "" });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
     <div className="sign-in">
       <h1>I already have an account</h1>
       <span>Sign in with your email and password</span>
-      <form onClick={handleSubmit}>
+      <form>
         <FormInput
           handleChange={handleChange}
           name="email"
@@ -47,7 +55,9 @@ const SignIn = () => {
           label="Password"
         />
         <div className="buttons">
-          <CustonButton type="submit">Sign In</CustonButton>
+          <CustonButton type="submit" onClick={handleSubmit}>
+            Sign In
+          </CustonButton>
           <CustonButton type="button" onClick={signInWithGoogle} isGoogleSignIn>
             Sign In with Google
           </CustonButton>
