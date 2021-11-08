@@ -9,17 +9,20 @@ import { auth } from "./firebase/firebase";
 import { createUserProfileDocument } from "./firebase/firebase";
 import { onAuthStateChanged } from "@firebase/auth";
 import { onSnapshot } from "@firebase/firestore";
+import { useDispatch } from "react-redux";
+import { SET_CURRENT_USER } from "../src/redux/user/user.reducer";
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         onSnapshot(userRef, (snapShot) => {
-          setCurrentUser({ id: snapShot.id, ...snapShot.data() });
+          dispatch(SET_CURRENT_USER({ id: snapShot.id, ...snapShot.data() }));
         });
       } else {
-        setCurrentUser(userAuth);
+        dispatch(SET_CURRENT_USER(userAuth));
       }
     });
     return () => {
@@ -29,7 +32,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header currentUser={currentUser} />
+      <Header />
 
       <Switch>
         <Route exact path="/" component={HomePage} />
