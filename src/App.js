@@ -1,5 +1,5 @@
 import { React, useState, useEffect } from "react";
-import { Switch, Route } from "react-router";
+import { Switch, Route, Redirect } from "react-router";
 import "./App.css";
 import HomePage from "./pages/Homepage/Homepage";
 import ShopPage from "./pages/Shop/ShopPage";
@@ -9,10 +9,12 @@ import { auth } from "./firebase/firebase";
 import { createUserProfileDocument } from "./firebase/firebase";
 import { onAuthStateChanged } from "@firebase/auth";
 import { onSnapshot } from "@firebase/firestore";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SET_CURRENT_USER } from "../src/redux/user/user.reducer";
+import { selectCurrentUser } from "./redux/user/user.reducer";
 function App() {
   const dispatch = useDispatch();
+  const currentUser = useSelector(selectCurrentUser);
 
   useEffect(() => {
     const unsubscribeFromAuth = onAuthStateChanged(auth, async (userAuth) => {
@@ -37,7 +39,13 @@ function App() {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
-        <Route path="/signin" component={SignInAndSignUpPage} />
+        <Route
+          exact
+          path="/signin"
+          render={() =>
+            currentUser ? <Redirect to="/" /> : <SignInAndSignUpPage />
+          }
+        />
       </Switch>
     </div>
   );
