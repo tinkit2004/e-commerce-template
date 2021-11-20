@@ -73,6 +73,7 @@ export const selectCartItemsPriceTotal = createSelector(
       0
     )
 );
+
 // export const selectCartItemsCount = (state) =>
 //   state.cart.cartItems.reduce(
 //     (prevQuantity, cartItem) => prevQuantity + cartItem.quantity,

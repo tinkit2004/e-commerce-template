@@ -1,11 +1,27 @@
 import { configureStore } from "@reduxjs/toolkit";
 import logger from "redux-logger";
-import userReducer from "./user/user.reducer";
-import cartReducer from "./cart/cart.reducer";
-export default configureStore({
-  reducer: {
-    user: userReducer,
-    cart: cartReducer,
-  },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+
+import persistedReducer from "./root-reducer";
+import {
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
+
+
+const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(logger),
 });
+export const persistor = persistStore(store);
+
+export default store;
