@@ -12,13 +12,7 @@ const shopSlice = createSlice({
     });
   },
 });
-const Collection_ID_Map = {
-  hats: 1,
-  sneakers: 2,
-  jackets: 3,
-  women: 4,
-  mens: 5,
-};
+
 export const selectShop = (state) => state.shop;
 export const selectCollections = createSelector(
   selectShop,
