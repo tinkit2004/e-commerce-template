@@ -1,24 +1,27 @@
-import "./collection-item.scss";
-import CustonButton from "../custom-button/custom-button";
 import { useDispatch } from "react-redux";
 import { addItems } from "../../redux/cart/cart.reducer";
+import {
+  BackGroundImage,
+  CollectionItemContainer,
+  NameContainer,
+  PriceContainer,
+  AddButton,
+  CollectionFooterContainer,
+} from "./collection-item-style";
 const CollectionItem = ({ item }) => {
   const dispatch = useDispatch();
-  const { id, name, imageUrl, price } = item;
+  const { name, imageUrl, price } = item;
   return (
-    <div className="collection-item">
-      <div
-        className="image"
-        style={{ backgroundImage: `url(${imageUrl})` }}
-      ></div>
-      <div className="collection-footer">
-        <span className="name">{name}</span>
-        <span className="price">{price}</span>
-      </div>
-      <CustonButton inverted onClick={() => dispatch(addItems(item))}>
+    <CollectionItemContainer>
+      <BackGroundImage className="image" imageUrl={imageUrl}></BackGroundImage>
+      <CollectionFooterContainer>
+        <NameContainer>{name}</NameContainer>
+        <PriceContainer>{price}</PriceContainer>
+      </CollectionFooterContainer>
+      <AddButton inverted onClick={() => dispatch(addItems(item))}>
         Add To Cart
-      </CustonButton>
-    </div>
+      </AddButton>
+    </CollectionItemContainer>
   );
 };
 
