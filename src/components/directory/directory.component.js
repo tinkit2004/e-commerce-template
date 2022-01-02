@@ -1,6 +1,6 @@
 // import { useState } from "react";
 import MenItem from "../menu-item/menu-item.compnent";
-import "./directory.styles.scss";
+import { DirectoryMenueContainer } from "./directory.component.style";
 import { useSelector } from "react-redux";
 import { selectDirectorySections } from "../../redux/directory/directory.reducer";
 
@@ -42,11 +42,11 @@ const Directory = () => {
   //   },
   // ]);
   return (
-    <div className="directory-menu">
+    <DirectoryMenueContainer>
       {directoryData.map(({ id, ...otherSectionProps }) => (
         <MenItem key={id} {...otherSectionProps} />
       ))}
-    </div>
+    </DirectoryMenueContainer>
   );
 };
 

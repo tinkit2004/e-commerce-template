@@ -1,4 +1,5 @@
-import "./signin.scss";
+
+import { SignInContainer, SignInButtonContainer } from "./sign-in-styles";
 import { useState } from "react";
 import FormInput from "../form-input/form-input";
 import CustonButton from "../custom-button/custom-button";
@@ -33,7 +34,7 @@ const SignIn = () => {
   };
 
   return (
-    <div className="sign-in">
+    <SignInContainer>
       <h1>I already have an account</h1>
       <span>Sign in with your email and password</span>
       <form>
@@ -54,16 +55,16 @@ const SignIn = () => {
           value={userState.password}
           label="Password"
         />
-        <div className="buttons">
+        <SignInButtonContainer>
           <CustonButton type="submit" onClick={handleSubmit}>
             Sign In
           </CustonButton>
           <CustonButton type="button" onClick={signInWithGoogle} isGoogleSignIn>
             Sign In with Google
           </CustonButton>
-        </div>
+        </SignInButtonContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 

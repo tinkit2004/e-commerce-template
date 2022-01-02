@@ -1,4 +1,4 @@
-import "./sign-up.scss";
+import { SignUpFormContainer, SignUpTitle } from "./sign-up-styles";
 import FormInput from "../form-input/form-input";
 import CustonButton from "../custom-button/custom-button";
 import { createUserProfileDocument, auth } from "../../firebase/firebase";
@@ -47,8 +47,8 @@ const SignUp = () => {
     }
   };
   return (
-    <div className="sign-up">
-      <h2 className="title">I do not have a account</h2>
+    <SignUpFormContainer>
+      <SignUpTitle>I do not have a account</SignUpTitle>
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
         <FormInput
@@ -85,7 +85,7 @@ const SignUp = () => {
         />
         <CustonButton type="submit">Sign Up</CustonButton>
       </form>
-    </div>
+    </SignUpFormContainer>
   );
 };
 
